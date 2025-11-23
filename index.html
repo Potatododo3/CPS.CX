@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Position Size Calculator</title>
+    <style>
+        body {
+            font-family: Arial;
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 10px;
+            line-height: 1.5;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        #result {
+            margin-top: 15px;
+            padding: 10px;
+            border: 1px solid #aaa;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Position Size Calculator</h2>
+
+<label>Signal Type</label>
+<select id="signalType">
+    <option value="saltwayer">Saltwayer</option>
+    <option value="neil">Neil</option>
+</select>
+
+<label>DCA Mode</label>
+<select id="dcaMode">
+    <option value="with">With DCA</option>
+    <option value="without">No DCA</option>
+</select>
+
+<label>Account Balance ($)</label>
+<input type="number" id="balance" placeholder="Enter balance">
+
+<label>Risk Percent (%)</label>
+<input type="number" id="riskPercent" placeholder="Example: 5">
+
+<label>Entry Price</label>
+<input type="number" id="entry" step="0.0001">
+
+<label>DCA Price</label>
+<input type="number" id="dca" step="0.0001">
+
+<label>Stop Loss Price</label>
+<input type="number" id="sl" step="0.0001">
+
+<button onclick="calculate()">Calculate</button>
+
+<div id="result"></div>
+
+<script>
+function calculate() {
+    let type = document.getElementById("signalType").value;
+    let dcaMode = document.getElementById("dcaMode").value;
+
+    let balance = parseFloat(document.getElementById("balance").value);
+    let riskPercent = parseFloat(document.getElementById("riskPercent").value);
+    let entry = parseFloat(document.getElementById("entry").value);
+    let dca = parseFloat(document.getElementById("dca").value);
+    let sl = parseFloat(document.getElementById("sl").value);
+
+    if (isNaN(balance) || isNaN(riskPercent) || isNaN(entry) || isNaN(sl)) {
+        document.getElementById("result").innerHTML = "Please fill all required fields.";
+        return;
+    }
+
+    let risk = balance * (riskPercent / 100);
+
+    // No DCA case
+    if (dcaMode === "without") {
+        let mainSize = risk / (entry - sl);
+
+        document.getElementById("result").innerHTML = `
+            <strong>Main Entry Size:</strong> ${mainSize.toFixed(4)} tokens<br>
+            <strong>DCA Size:</strong> None (No DCA)
+        `;
+        return;
+    }
+
+    // With DCA
+    if (isNaN(dca)) {
+        document.getElementById("result").innerHTML = "Enter a DCA price.";
+        return;
+    }
+
+    let multiplier = type === "saltwayer" ? 2.5 : 2;
+
+    let denominator = (entry - sl) + multiplier * (dca - sl);
+    let mainSize = risk / denominator;
+    let dcaSize = mainSize * multiplier;
+
+    document.getElementById("result").innerHTML = `
+        <strong>Main Entry Size:</strong> ${mainSize.toFixed(4)} tokens<br>
+        <strong>DCA Size:</strong> ${dcaSize.toFixed(4)} tokens
+    `;
+}
+</script>
+
+</body>
+</html>
