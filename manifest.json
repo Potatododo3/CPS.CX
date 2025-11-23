@@ -1,0 +1,13 @@
+{
+  "name": "PositionSetup",
+  "short_name": "CPS",
+  "icons": [
+    {
+      "src": "apple-touch-icon",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ],
+  "display": "standalone",
+  "start_url": "/"
+}
