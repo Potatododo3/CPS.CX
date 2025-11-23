@@ -173,6 +173,287 @@
             }
         }
 
+        .dca-group {
+            transition: all 0.3s ease;
+            opacity: 1;
+            max-height: 150px;
+            overflow: hidden;
+        }
+
+        .dca-group.hidden {
+            opacity: 0;
+            max-height: 0;
+            margin: 0;
+        }
+
+        .settings-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(96, 165, 250, 0.2);
+            border: 1px solid rgba(96, 165, 250, 0.4);
+            color: #60a5fa;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .settings-btn:hover {
+            background: rgba(96, 165, 250, 0.3);
+            border-color: rgba(96, 165, 250, 0.6);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            animation: slideIn 0.3s ease;
+        }
+
+        .modal-header {
+            color: #ffffff;
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: #a0d8f1;
+            font-size: 28px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+            padding: 0;
+            width: auto;
+            margin: 0;
+        }
+
+        .close-modal:hover {
+            color: #ffffff;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(96, 165, 250, 0.2);
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            color: #a0d8f1;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+            width: auto;
+            margin: 0;
+            margin-bottom: -1px;
+        }
+
+        .tab-btn.active {
+            color: #60a5fa;
+            border-bottom-color: #60a5fa;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .preset-form {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .preset-form input {
+            flex: 1;
+        }
+
+        .preset-form button {
+            flex: 0 0 auto;
+            padding: 12px 24px;
+            margin: 0;
+            margin-top: 0;
+        }
+
+        .preset-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .preset-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(96, 165, 250, 0.1);
+            border: 1px solid rgba(96, 165, 250, 0.3);
+            padding: 12px 16px;
+            border-radius: 8px;
+            color: #ffffff;
+            font-size: 14px;
+        }
+
+        .preset-item-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .preset-item-name {
+            color: #60a5fa;
+            font-weight: 600;
+        }
+
+        .preset-item-value {
+            color: #a0d8f1;
+            font-size: 12px;
+        }
+
+        .preset-item-btn {
+            background: rgba(239, 68, 68, 0.3);
+            border: 1px solid rgba(239, 68, 68, 0.5);
+            color: #ef4444;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.3s ease;
+            width: auto;
+            margin: 0;
+        }
+
+        .preset-item-btn:hover {
+            background: rgba(239, 68, 68, 0.5);
+        }
+
+        .risk-preset-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(96, 165, 250, 0.1);
+            border: 1px solid rgba(96, 165, 250, 0.3);
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .risk-preset-label {
+            color: #a0d8f1;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .risk-preset-input {
+            width: 80px;
+            padding: 8px !important;
+            margin: 0 !important;
+        }
+
+        .pnl-section {
+            margin-top: 24px;
+            padding: 20px;
+            background: rgba(96, 165, 250, 0.05);
+            border: 2px solid rgba(96, 165, 250, 0.2);
+            border-radius: 12px;
+            color: #ffffff;
+            font-size: 14px;
+            line-height: 1.8;
+            display: none;
+        }
+
+        .pnl-section.active {
+            display: block;
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+
+        .pnl-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(96, 165, 250, 0.1);
+        }
+
+        .pnl-row:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .pnl-label {
+            color: #a0d8f1;
+        }
+
+        .pnl-value {
+            color: #60a5fa;
+            font-weight: 600;
+        }
+
+        .pnl-loss {
+            color: #ef4444;
+        }
+
+        .pnl-gain {
+            color: #10b981;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(16, 185, 129, 0.9);
+            color: white;
+            padding: 16px 24px;
+            border-radius: 8px;
+            animation: slideIn 0.3s ease;
+            z-index: 2000;
+        }
+
+        .notification.error {
+            background: rgba(239, 68, 68, 0.9);
+        }
+
         @media (max-width: 600px) {
             .container {
                 padding: 30px 20px;
@@ -181,17 +462,27 @@
             h2 {
                 font-size: 24px;
             }
+
+            .settings-btn {
+                top: 10px;
+                right: 10px;
+            }
+
+            .modal-content {
+                padding: 30px 20px;
+            }
         }
     </style>
 </head>
 <body>
 
 <div class="container">
+    <button class="settings-btn" onclick="openSettings()">⚙️</button>
     <h2>Position Size Calculator</h2>
 
     <div class="input-group">
         <label>Signal Type</label>
-        <select id="signalType">
+        <select id="signalType" onchange="onSignalTypeChange()">
             <option value="saltwayer">Saltwayer</option>
             <option value="neil">Neil</option>
         </select>
@@ -199,7 +490,7 @@
 
     <div class="input-group">
         <label>DCA Mode</label>
-        <select id="dcaMode">
+        <select id="dcaMode" onchange="onDcaModeChange()">
             <option value="with">With DCA</option>
             <option value="without">No DCA</option>
         </select>
@@ -207,35 +498,152 @@
 
     <div class="input-group">
         <label>Account Balance ($)</label>
-        <input type="number" id="balance" placeholder="Enter balance">
+        <input type="number" id="balance" placeholder="Enter balance" oninput="updatePnlPreview()">
     </div>
 
     <div class="input-group">
         <label>Risk Percent (%)</label>
-        <input type="number" id="riskPercent" placeholder="Example: 5">
+        <input type="number" id="riskPercent" placeholder="Example: 5" oninput="updatePnlPreview()">
     </div>
 
     <div class="input-group">
         <label>Entry Price</label>
-        <input type="number" id="entry" step="0.0001" placeholder="0.0000">
+        <input type="number" id="entry" step="0.0001" placeholder="0.0000" oninput="updatePnlPreview()">
     </div>
 
-    <div class="input-group">
+    <div class="input-group dca-group" id="dcaGroup">
         <label>DCA Price</label>
-        <input type="number" id="dca" step="0.0001" placeholder="0.0000">
+        <input type="number" id="dca" step="0.0001" placeholder="0.0000" oninput="updatePnlPreview()">
     </div>
 
     <div class="input-group">
         <label>Stop Loss Price</label>
-        <input type="number" id="sl" step="0.0001" placeholder="0.0000">
+        <input type="number" id="sl" step="0.0001" placeholder="0.0000" oninput="updatePnlPreview()">
     </div>
 
     <button onclick="calculate()">Calculate Position Size</button>
 
+    <div class="pnl-section" id="pnlPreview">
+        <div class="pnl-row">
+            <span class="pnl-label">Risk Amount:</span>
+            <span class="pnl-value" id="pnlRiskAmount">-</span>
+        </div>
+        <div class="pnl-row">
+            <span class="pnl-label">Worst Case (Stop Loss):</span>
+            <span class="pnl-value pnl-loss" id="pnlWorstCase">-</span>
+        </div>
+        <div class="pnl-row">
+            <span class="pnl-label">Break Even:</span>
+            <span class="pnl-value" id="pnlBreakEven">-</span>
+        </div>
+    </div>
+
     <div id="result" style="display: none;"></div>
 </div>
 
+<div id="settingsModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <span>Settings & Presets</span>
+            <button class="close-modal" onclick="closeSettings()">×</button>
+        </div>
+
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('accounts')">Account Presets</button>
+            <button class="tab-btn" onclick="switchTab('risk')">Risk Presets</button>
+        </div>
+
+        <div id="accountsTab" class="tab-content active">
+            <div class="preset-form">
+                <input type="text" id="presetName" placeholder="Enter preset name" style="margin: 0;">
+                <button onclick="saveAccountPreset()" style="width: auto; padding: 12px 24px; margin: 0;">Save</button>
+            </div>
+            <div class="preset-list" id="accountPresetsList"></div>
+        </div>
+
+        <div id="riskTab" class="tab-content">
+            <div class="risk-preset-item">
+                <span class="risk-preset-label">Saltwayer Default Risk %:</span>
+                <input type="number" id="riskSaltwayer" class="risk-preset-input" step="0.1" min="0.1" max="100">
+            </div>
+            <div class="risk-preset-item">
+                <span class="risk-preset-label">Neil Default Risk %:</span>
+                <input type="number" id="riskNeil" class="risk-preset-input" step="0.1" min="0.1" max="100">
+            </div>
+            <button onclick="saveRiskPresets()" style="width: 100%; margin-top: 20px;">Save Risk Presets</button>
+        </div>
+    </div>
+</div>
+
 <script>
+const STORAGE_KEY_ACCOUNTS = 'position_calculator_accounts';
+const STORAGE_KEY_RISK = 'position_calculator_risk';
+const DEFAULT_RISK_PRESETS = { saltwayer: 5, neil: 4 };
+
+function initializeApp() {
+    loadRiskPresets();
+    updateAccountPresetsList();
+    onDcaModeChange();
+}
+
+function getStoredData(key, defaultValue) {
+    const data = localStorage.getItem(key);
+    return data ? JSON.parse(data) : defaultValue;
+}
+
+function saveStoredData(key, data) {
+    localStorage.setItem(key, JSON.stringify(data));
+}
+
+function onDcaModeChange() {
+    const dcaMode = document.getElementById("dcaMode").value;
+    const dcaGroup = document.getElementById("dcaGroup");
+    if (dcaMode === "without") {
+        dcaGroup.classList.add("hidden");
+    } else {
+        dcaGroup.classList.remove("hidden");
+    }
+    updatePnlPreview();
+}
+
+function onSignalTypeChange() {
+    const signalType = document.getElementById("signalType").value;
+    const riskPresets = getStoredData(STORAGE_KEY_RISK, DEFAULT_RISK_PRESETS);
+    const riskPercent = riskPresets[signalType] || (signalType === "saltwayer" ? 5 : 4);
+    document.getElementById("riskPercent").value = riskPercent;
+    updatePnlPreview();
+}
+
+function updatePnlPreview() {
+    const balance = parseFloat(document.getElementById("balance").value);
+    const riskPercent = parseFloat(document.getElementById("riskPercent").value);
+    const entry = parseFloat(document.getElementById("entry").value);
+    const sl = parseFloat(document.getElementById("sl").value);
+    const dcaMode = document.getElementById("dcaMode").value;
+    const dca = parseFloat(document.getElementById("dca").value);
+    const pnlPreview = document.getElementById("pnlPreview");
+
+    if (isNaN(balance) || isNaN(riskPercent) || isNaN(entry) || isNaN(sl)) {
+        pnlPreview.classList.remove("active");
+        return;
+    }
+
+    if (dcaMode === "with" && isNaN(dca)) {
+        pnlPreview.classList.remove("active");
+        return;
+    }
+
+    const riskAmount = balance * (riskPercent / 100);
+    const priceDiff = Math.abs(entry - sl);
+    const breakEven = entry;
+
+    document.getElementById("pnlRiskAmount").textContent = `-$${riskAmount.toFixed(2)}`;
+    document.getElementById("pnlWorstCase").textContent = `-$${riskAmount.toFixed(2)} (${riskPercent.toFixed(1)}%)`;
+    document.getElementById("pnlBreakEven").textContent = `$0 @ $${breakEven.toFixed(4)}`;
+
+    pnlPreview.classList.add("active");
+}
+
 function calculate() {
     let type = document.getElementById("signalType").value;
     let dcaMode = document.getElementById("dcaMode").value;
@@ -301,6 +709,126 @@ function calculate() {
         resultDiv.style.animation = "fadeIn 0.5s ease-out forwards";
     }, 10);
 }
+
+function openSettings() {
+    document.getElementById("settingsModal").classList.add("active");
+    loadRiskPresets();
+    updateAccountPresetsList();
+}
+
+function closeSettings() {
+    document.getElementById("settingsModal").classList.remove("active");
+}
+
+function switchTab(tab) {
+    document.querySelectorAll(".tab-content").forEach(el => el.classList.remove("active"));
+    document.querySelectorAll(".tab-btn").forEach(el => el.classList.remove("active"));
+
+    document.getElementById(tab + "Tab").classList.add("active");
+    event.target.classList.add("active");
+}
+
+function saveAccountPreset() {
+    const presetName = document.getElementById("presetName").value.trim();
+    const balance = parseFloat(document.getElementById("balance").value);
+
+    if (!presetName) {
+        showNotification("Please enter a preset name", true);
+        return;
+    }
+
+    if (isNaN(balance)) {
+        showNotification("Please enter a valid balance", true);
+        return;
+    }
+
+    const accounts = getStoredData(STORAGE_KEY_ACCOUNTS, {});
+    accounts[presetName] = balance;
+    saveStoredData(STORAGE_KEY_ACCOUNTS, accounts);
+
+    document.getElementById("presetName").value = "";
+    updateAccountPresetsList();
+    showNotification(`Preset "${presetName}" saved successfully`);
+}
+
+function loadAccountPreset(presetName) {
+    const accounts = getStoredData(STORAGE_KEY_ACCOUNTS, {});
+    const balance = accounts[presetName];
+    if (balance !== undefined) {
+        document.getElementById("balance").value = balance;
+        updatePnlPreview();
+        showNotification(`Preset "${presetName}" loaded`);
+    }
+}
+
+function deleteAccountPreset(presetName) {
+    if (confirm(`Delete preset "${presetName}"?`)) {
+        const accounts = getStoredData(STORAGE_KEY_ACCOUNTS, {});
+        delete accounts[presetName];
+        saveStoredData(STORAGE_KEY_ACCOUNTS, accounts);
+        updateAccountPresetsList();
+        showNotification(`Preset "${presetName}" deleted`);
+    }
+}
+
+function updateAccountPresetsList() {
+    const accounts = getStoredData(STORAGE_KEY_ACCOUNTS, {});
+    const presetList = document.getElementById("accountPresetsList");
+
+    if (Object.keys(accounts).length === 0) {
+        presetList.innerHTML = '<div style="color: #a0d8f1; text-align: center; padding: 20px;">No presets saved yet</div>';
+        return;
+    }
+
+    presetList.innerHTML = Object.entries(accounts).map(([name, balance]) => `
+        <div class="preset-item">
+            <div class="preset-item-info">
+                <div class="preset-item-name">${name}</div>
+                <div class="preset-item-value">$${balance.toFixed(2)}</div>
+            </div>
+            <div style="display: flex; gap: 8px;">
+                <button class="preset-item-btn" onclick="loadAccountPreset('${name}')">Load</button>
+                <button class="preset-item-btn" onclick="deleteAccountPreset('${name}')">Delete</button>
+            </div>
+        </div>
+    `).join("");
+}
+
+function loadRiskPresets() {
+    const riskPresets = getStoredData(STORAGE_KEY_RISK, DEFAULT_RISK_PRESETS);
+    document.getElementById("riskSaltwayer").value = riskPresets.saltwayer || 5;
+    document.getElementById("riskNeil").value = riskPresets.neil || 4;
+}
+
+function saveRiskPresets() {
+    const saltwayerRisk = parseFloat(document.getElementById("riskSaltwayer").value);
+    const neilRisk = parseFloat(document.getElementById("riskNeil").value);
+
+    if (isNaN(saltwayerRisk) || isNaN(neilRisk) || saltwayerRisk <= 0 || neilRisk <= 0) {
+        showNotification("Please enter valid risk percentages", true);
+        return;
+    }
+
+    const riskPresets = {
+        saltwayer: saltwayerRisk,
+        neil: neilRisk
+    };
+    saveStoredData(STORAGE_KEY_RISK, riskPresets);
+    showNotification("Risk presets saved successfully");
+}
+
+function showNotification(message, isError = false) {
+    const notification = document.createElement("div");
+    notification.className = `notification${isError ? " error" : ""}`;
+    notification.textContent = message;
+    document.body.appendChild(notification);
+
+    setTimeout(() => {
+        notification.remove();
+    }, 3000);
+}
+
+document.addEventListener("DOMContentLoaded", initializeApp);
 </script>
 
 </body>
