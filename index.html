@@ -28,6 +28,7 @@
         <select id="signalType" onchange="onSignalTypeChange()">
             <option value="saltwayer">Saltwayer</option>
             <option value="neil">Neil</option>
+            <option value="shirus">Shirus</option>
         </select>
     </div>
 
@@ -112,6 +113,10 @@
             <div class="risk-preset-item">
                 <span class="risk-preset-label">Neil Default Risk %:</span>
                 <input type="number" id="riskNeil" class="risk-preset-input" step="0.1" min="0.1" max="100">
+            </div>
+            <div class="risk-preset-item">
+                <span class="risk-preset-label">Shirus Default Risk %:</span>
+                <input type="number" id="riskShirus" class="risk-preset-input" step="0.1" min="0.1" max="100">
             </div>
             <button onclick="saveRiskPresets()" style="width: 100%; margin-top: 20px;">Save Risk Presets</button>
         </div>

@@ -1,6 +1,6 @@
 const STORAGE_KEY_ACCOUNTS = 'position_calculator_accounts';
 const STORAGE_KEY_RISK = 'position_calculator_risk';
-const DEFAULT_RISK_PRESETS = { saltwayer: 5, neil: 4 };
+const DEFAULT_RISK_PRESETS = { saltwayer: 5, neil: 4, shirus: 1 };
 
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('/sw.js');
@@ -35,7 +35,16 @@ function onDcaModeChange() {
 function onSignalTypeChange() {
     const signalType = document.getElementById("signalType").value;
     const riskPresets = getStoredData(STORAGE_KEY_RISK, DEFAULT_RISK_PRESETS);
-    const riskPercent = riskPresets[signalType] || (signalType === "saltwayer" ? 5 : 4);
+    let riskPercent;
+
+    if (signalType === "saltwayer") {
+        riskPercent = riskPresets.saltwayer || 5;
+    } else if (signalType === "neil") {
+        riskPercent = riskPresets.neil || 4;
+    } else if (signalType === "shirus") {
+        riskPercent = riskPresets.shirus || 1;
+    }
+
     document.getElementById("riskPercent").value = riskPercent;
     updatePnlPreview();
 }
@@ -47,10 +56,25 @@ function updatePnlPreview() {
     const sl = parseFloat(document.getElementById("sl").value);
     const dcaMode = document.getElementById("dcaMode").value;
     const dca = parseFloat(document.getElementById("dca").value);
+    const signalType = document.getElementById("signalType").value;
     const pnlPreview = document.getElementById("pnlPreview");
 
     if (isNaN(balance) || isNaN(riskPercent) || isNaN(entry) || isNaN(sl)) {
         pnlPreview.classList.remove("active");
+        return;
+    }
+
+    if (signalType === "shirus") {
+        if (isNaN(dca)) {
+            pnlPreview.classList.remove("active");
+            return;
+        }
+
+        const riskAmount = balance * 0.01;
+        document.getElementById("pnlRiskAmount").textContent = `-$${riskAmount.toFixed(2)}`;
+        document.getElementById("pnlWorstCase").textContent = `-$${riskAmount.toFixed(2)} (1%)`;
+        document.getElementById("pnlBreakEven").textContent = `$0 @ $${entry.toFixed(4)}`;
+        pnlPreview.classList.add("active");
         return;
     }
 
@@ -85,6 +109,38 @@ function calculate() {
     if (isNaN(balance) || isNaN(riskPercent) || isNaN(entry) || isNaN(sl)) {
         resultDiv.style.display = "block";
         resultDiv.innerHTML = "Please fill all required fields.";
+        resultDiv.style.animation = "none";
+        setTimeout(() => {
+            resultDiv.style.animation = "fadeIn 0.5s ease-out forwards";
+        }, 10);
+        return;
+    }
+
+    if (type === "shirus") {
+        if (isNaN(dca)) {
+            resultDiv.style.display = "block";
+            resultDiv.innerHTML = "Enter a DCA price.";
+            resultDiv.style.animation = "none";
+            setTimeout(() => {
+                resultDiv.style.animation = "fadeIn 0.5s ease-out forwards";
+            }, 10);
+            return;
+        }
+
+        let d1 = sl - entry;
+        let d2 = sl - dca;
+        let size1 = (balance * 0.01) / (d1 + d2);
+        let size2 = size1;
+        let entryUsd = size1 * entry;
+        let dcaUsd = size2 * dca;
+
+        resultDiv.style.display = "block";
+        resultDiv.innerHTML = `
+            <strong>Entry Size:</strong> ${size1.toFixed(4)} tokens<br>
+            <strong>Entry USD:</strong> $${entryUsd.toFixed(2)}<br>
+            <strong>DCA Size:</strong> ${size2.toFixed(4)} tokens<br>
+            <strong>DCA USD:</strong> $${dcaUsd.toFixed(2)}
+        `;
         resultDiv.style.animation = "none";
         setTimeout(() => {
             resultDiv.style.animation = "fadeIn 0.5s ease-out forwards";
@@ -224,20 +280,23 @@ function loadRiskPresets() {
     const riskPresets = getStoredData(STORAGE_KEY_RISK, DEFAULT_RISK_PRESETS);
     document.getElementById("riskSaltwayer").value = riskPresets.saltwayer || 5;
     document.getElementById("riskNeil").value = riskPresets.neil || 4;
+    document.getElementById("riskShirus").value = riskPresets.shirus || 1;
 }
 
 function saveRiskPresets() {
     const saltwayerRisk = parseFloat(document.getElementById("riskSaltwayer").value);
     const neilRisk = parseFloat(document.getElementById("riskNeil").value);
+    const shirusRisk = parseFloat(document.getElementById("riskShirus").value);
 
-    if (isNaN(saltwayerRisk) || isNaN(neilRisk) || saltwayerRisk <= 0 || neilRisk <= 0) {
+    if (isNaN(saltwayerRisk) || isNaN(neilRisk) || isNaN(shirusRisk) || saltwayerRisk <= 0 || neilRisk <= 0 || shirusRisk <= 0) {
         showNotification("Please enter valid risk percentages", true);
         return;
     }
 
     const riskPresets = {
         saltwayer: saltwayerRisk,
-        neil: neilRisk
+        neil: neilRisk,
+        shirus: shirusRisk
     };
     saveStoredData(STORAGE_KEY_RISK, riskPresets);
     showNotification("Risk presets saved successfully");
